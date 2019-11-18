@@ -1,5 +1,5 @@
 // Sensex data from yahoo --> Public Data source https://finance.yahoo.com/quote/%5EBSESN/history/
-dd:(0;1;2;3;4;5;6)!`Sat`Sun`Mon`Tue`Wed`Thu`Fri; /- day dictionary
+dd:((!)7)!`Sat`Sun`Mon`Tue`Wed`Thu`Fri; /- day dictionary
 / historical data
 hd:.Q.id update "D"$($:)Date from ("Sfffff";(,)",") 0:`:/Users/utsav/Downloads/sensex.csv;
 hd: update yr:`year$Date, my:`month$Date, md:5_'($) Date, we:7 xbar' Date from hd;
