@@ -3,7 +3,7 @@
 dd:((!)7)!`Sat`Sun`Mon`Tue`Wed`Thu`Fri; /- day dictionary
 / historical data
 hd:.Q.id update "D"$($:)Date from ("Sffffffffffff";(,)",")
-    0:`:/Users/utsav/Downloads/sunt.csv; /- historical Data
+    0:`:/Users/utsav/Downloads/irctc.csv; /- historical Data
 hdf: update yr:`year$Date, my:`month$Date, md:5_'($) Date, we:7 xbar' Date from hd; /- historic data for gds function
 
 gds:{   /- get Day wise stats
@@ -26,6 +26,7 @@ gds[`week]
 
 //- correlations between different fields
 hd[`ClosePrice] cor hd`DeliverableQuantity
+
 hd[`ClosePrice] cor hd`NoofShares
 
 
@@ -43,10 +44,3 @@ day:(0;1;2;3;4;5;6)!`Sat`Sun`Mon`Tue`Wed`Thu`Fri;
 
 /Day with max lowest price
 obyDay:select count i by da from update da:day[Date mod 7] from nhd;
-
-
-//- Lom - monday
-//- ham - mon, fri
-//- irc - fri
-//- kot - mon, fri
-//- sunt - mon, fri

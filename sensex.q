@@ -20,4 +20,4 @@ gds:{   /- get Day wise stats
  };
 
 //- Test
-gds[`week];
+gds[`week]
