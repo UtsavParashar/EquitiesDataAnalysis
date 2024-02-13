@@ -22,6 +22,12 @@
 / Var - How far the market's data points spread out from their average value
 
 sbi: ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/sbi.csv";
-sensex: ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/sensex.csv";
-res:sensex lj 1!sbi;
-res
+sensex: `date xdesc ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/sensex.csv";
+nifty: `date xdesc ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/nifty.csv";
+sbi: select px:max[sbi]-min[sbi] by date.month from sbi;
+sensex: select sensexPx:max[sensex]-min[sensex] by date.month from sensex;
+res:sensex lj sbi;
+res:0!res;
+update sensexMMS:(sensex-min sensex)%(max[sensex]-min sensex),niftyMMS:(nifty-min nifty)%(max[nifty]-min nifty) from res
+
+beta:cov[res[`sensexPx];res`px]%var[res`sensexPx]
