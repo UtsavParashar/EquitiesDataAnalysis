@@ -20,14 +20,17 @@
 / Rm - the return on the overall market
 / Cov - How changes in a stock returns are related to changes in the market'sreturns
 / Var - How far the market's data points spread out from their average value
+/ BETA SHOULD BE CALCULATED ON DOD PERCENTAGE CHANGE
 
 sbi: ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/sbi.csv";
 sensex: `date xdesc ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/sensex.csv";
 nifty: `date xdesc ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/nifty.csv";
-sbi: select px:max[sbi]-min[sbi] by date.month from sbi;
+hdfc: `date xdesc ("DF";enlist csv) 0:hsym `$"/Users/utsav/Downloads/hdfc.csv";
 sensex: select sensexPx:max[sensex]-min[sensex] by date.month from sensex;
-res:sensex lj sbi;
-res:0!res;
-update sensexMMS:(sensex-min sensex)%(max[sensex]-min sensex),niftyMMS:(nifty-min nifty)%(max[nifty]-min nifty) from res
-
-beta:cov[res[`sensexPx];res`px]%var[res`sensexPx]
+res:sensex ij 1!sbi;
+mpct:{100*(1_deltas x)%-1_x};
+sensexPC:mpct res`sensex;
+niftyPC:mpct res`nifty;
+sbiPC:mpct res`sbi;
+beta:{[eqindex;ticker] scov[eqindex;ticker]%svar eqindex};
+capm:{[Rf;Rm;beta] Rf+beta*Rm-Rf};
