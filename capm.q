@@ -34,3 +34,10 @@ niftyPC:mpct res`nifty;
 sbiPC:mpct res`sbi;
 beta:{[eqindex;ticker] scov[eqindex;ticker]%svar eqindex};
 capm:{[Rf;Rm;beta] Rf+beta*Rm-Rf};
+
+
+// Discounted Cash Flow
+// Intrinsic Value = Free Cash Flow(FCFE) % (1+r)^n # where n lies from 1 to infinity
+// Terminal Value = Free Cash Flow to Equity in Terminal year * (1+g) % r-g
+// r - cost of capital
+// g - stable long term growth rate
